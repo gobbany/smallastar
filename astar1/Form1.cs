@@ -118,8 +118,7 @@ namespace astar1
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            path=null;
-            path = new List<Cell>();
+            path.Clear();
             foreach (var cell in grid)
             {
                 cell.IsObstacle = false;
