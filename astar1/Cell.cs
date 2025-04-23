@@ -1,5 +1,6 @@
 ﻿namespace astar1
 {
+    //main object
     public class Cell
     {
         public int Row { get; } //sor - readonly
