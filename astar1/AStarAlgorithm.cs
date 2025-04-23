@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
+
 namespace astar1
 {
     public static class AStarAlgorithm
@@ -20,7 +21,7 @@ namespace astar1
 
                 if (current == end)
                 {
-                    return ReconstructPath(end);
+                    return ReconstructPath(end, start);
                 }
 
                 openList.Remove(current);
@@ -50,15 +51,18 @@ namespace astar1
             return new List<Cell>();
         }
 
-        private static List<Cell> ReconstructPath(Cell end)
+        private static List<Cell> ReconstructPath(Cell end, Cell start)
         {
             var path = new List<Cell>();
             var current = end;
-            while (current != null)
+            while (true)    // changed  from null pointer to actual starting position check
             {
+                if (current.Col == start.Col && current.Row == start.Row)
+                    break;
                 path.Add(current);
                 current = current.Previous;
             }
+            //path.Add(start);
             path.Reverse();
             return path;
         }

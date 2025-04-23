@@ -109,7 +109,7 @@ namespace astar1
             }
 
             path = AStarAlgorithm.FindPath(grid, startCell, endCell);
-            foreach(var cell in path)
+            foreach (var cell in path)
             {
                 Rectangle cellRect = new Rectangle(cell.Col * GridSize, cell.Row * GridSize, GridSize, GridSize);
                 pnlGrid.Invalidate(cellRect);
@@ -119,6 +119,7 @@ namespace astar1
         private void btnClear_Click(object sender, EventArgs e)
         {
             path.Clear();
+            path.Add(null);
             foreach (var cell in grid)
             {
                 cell.IsObstacle = false;
@@ -126,7 +127,7 @@ namespace astar1
             startCell = null;
             endCell = null;
             pnlGrid.Invalidate();
-            
+
         }
     }
 }
