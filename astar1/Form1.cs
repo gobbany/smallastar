@@ -9,8 +9,8 @@ namespace astar1
     public partial class Form1 : Form
     {
         private const int GridSize = 30;
-        private const int Rows = 15;
-        private const int Columns = 15;
+        private const int Rows = 20;
+        private const int Columns = 20;
 
         private Cell[,] grid = new Cell[Rows, Columns]; 
         private Cell startCell = null; //start
@@ -128,6 +128,13 @@ namespace astar1
             endCell = null;
             pnlGrid.Invalidate();
 
+        }
+
+        private void stepByStep_Click(object sender, EventArgs e)
+        {
+            btnStart.Hide();
+            btnClear.Hide();
+            
         }
     }
 }
