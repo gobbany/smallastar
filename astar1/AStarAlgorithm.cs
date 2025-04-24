@@ -10,18 +10,18 @@ namespace astar1
         public static List<Cell> FindPath(Cell[,] grid, Cell start, Cell end)
         {
             var openList = new List<Cell> { start };
-            var closedList = new HashSet<Cell>();
+            var closedList = new HashSet<Cell>(); //hashset for terminating duplicates--to not use these cells from now on
 
             start.G = 0;
             start.H = GetHeuristic(start, end);
 
             while (openList.Any())
             {
-                var current = openList.OrderBy(cell => cell.F).First();
+                var current = openList.OrderBy(cell => cell.F).First(); //least dist from end
 
                 if (current == end)
                 {
-                    return ReconstructPath(end, start);
+                    return ReconstructPath(end, start);//can construct path and making it
                 }
 
                 openList.Remove(current);
@@ -48,7 +48,7 @@ namespace astar1
                 }
             }
 
-            return new List<Cell>();
+            return new List<Cell>();//couldnt find path retuning empty list
         }
 
         private static List<Cell> ReconstructPath(Cell end, Cell start)
@@ -61,8 +61,8 @@ namespace astar1
                     break;
                 path.Add(current);
                 current = current.Previous;
-            }
-            //path.Add(start);
+            }//adding path elements to path and reversing it so it goes from start to end
+            ///path.Add(start);
             path.Reverse();
             return path;
         }
@@ -91,7 +91,7 @@ namespace astar1
 
         private static int GetHeuristic(Cell a, Cell b)
         {
-            return System.Math.Abs(a.Row - b.Row) + System.Math.Abs(a.Col - b.Col);
+            return System.Math.Abs(a.Row - b.Row) + System.Math.Abs(a.Col - b.Col);//distance formula
         }
     }
 }

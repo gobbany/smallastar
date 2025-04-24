@@ -8,14 +8,14 @@ namespace astar1
 {
     public partial class Form1 : Form
     {
-        private const int GridSize = 20;
-        private const int Rows = 20;
-        private const int Columns = 20;
+        private const int GridSize = 30;
+        private const int Rows = 15;
+        private const int Columns = 15;
 
-        private Cell[,] grid = new Cell[Rows, Columns]; //2D tömb
+        private Cell[,] grid = new Cell[Rows, Columns]; 
         private Cell startCell = null; //start
         private Cell endCell = null; //finish
-        private List<Cell> path = new List<Cell>(); //út celláinak listája
+        private List<Cell> path = new List<Cell>(); //path list
 
         public Form1()
         {
@@ -48,15 +48,15 @@ namespace astar1
                     Brush brush = Brushes.White;
 
                     if (cell == startCell)
-                        brush = Brushes.Green; // Start cella zöld
+                        brush = Brushes.Green; // start is green
                     else if (cell == endCell)
-                        brush = Brushes.Red;   // Finish cella piros
+                        brush = Brushes.Red;   // finish is red
                     else if (cell.IsObstacle)
-                        brush = Brushes.Black; // Fal cella fekete
+                        brush = Brushes.Black; // wall is black
                     else if (path.Contains(cell))
-                        brush = Brushes.Blue;  // út cella kék
+                        brush = Brushes.Blue;  // path is blue
 
-                    // Cella rajzolás
+                    // cell drawing
                     g.FillRectangle(brush, c * GridSize, r * GridSize, GridSize, GridSize);
                     g.DrawRectangle(Pens.Gray, c * GridSize, r * GridSize, GridSize, GridSize);
                 }
