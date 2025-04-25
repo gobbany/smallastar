@@ -17,6 +17,9 @@ namespace astar1
         private Cell endCell = null; //finish
         private List<Cell> path = new List<Cell>(); //path list
 
+        private IEnumerator<AstarStepState> stepEnumerator;
+        private Timer stepTimer;
+
         public Form1()
         {
             InitializeComponent();
@@ -35,6 +38,45 @@ namespace astar1
 
             pnlGrid.Paint += PnlGrid_Paint;
             pnlGrid.MouseClick += PnlGrid_MouseClick;
+            stepTimer = new Timer();
+            stepTimer.Interval = 50;
+            stepTimer.Tick += Timer1_Tick;
+        }
+
+        private void stepByStep_Click(object sender, EventArgs e)
+        {
+            if (startCell == null || endCell == null)
+            {
+                MessageBox.Show("Please set start and end cells.");
+                return;
+            }
+
+            stepEnumerator = AStarAlgorithm.PathStepIterator(grid, startCell, endCell).GetEnumerator();
+            stepTimer.Start();
+        }
+
+        private void Timer1_Tick(object sender, EventArgs e)
+        {
+            if (stepEnumerator == null || !stepEnumerator.MoveNext())
+            {
+                stepTimer.Stop();
+                return;
+            }
+
+            var state = stepEnumerator.Current;
+            foreach (var cell in state.OpenList) DrawCell(cell, Brushes.LightGreen);
+            foreach (var cell in state.ClosedList) DrawCell(cell, Brushes.Orange);
+            DrawCell(state.Current, Brushes.Purple);
+        }
+
+        private void DrawCell(Cell cell, Brush brush)
+        {
+            using (Graphics g = pnlGrid.CreateGraphics())
+            {
+                Rectangle rect = new Rectangle(cell.Col * GridSize, cell.Row * GridSize, GridSize, GridSize);
+                g.FillRectangle(brush, rect);
+                g.DrawRectangle(Pens.Gray, rect);
+            }
         }
 
         private void PnlGrid_Paint(object sender, PaintEventArgs e)
@@ -48,16 +90,13 @@ namespace astar1
                     Brush brush = Brushes.White;
 
                     if (cell == startCell)
-                        brush = Brushes.Green; // start is green
+                        DrawCell(startCell,Brushes.Green); // start is green
                     else if (cell == endCell)
-                        brush = Brushes.Red;   // finish is red
+                        DrawCell(endCell,Brushes.Red);   // finish is red
                     else if (cell.IsObstacle)
-                        brush = Brushes.Black; // wall is black
+                        DrawCell(cell,Brushes.Black); // wall is black
                     else if (path.Contains(cell))
-                        brush = Brushes.Blue;  // path is blue
-
-                    // cell drawing
-                    g.FillRectangle(brush, c * GridSize, r * GridSize, GridSize, GridSize);
+                        DrawCell(cell,Brushes.Blue);  // path is blue
                     g.DrawRectangle(Pens.Gray, c * GridSize, r * GridSize, GridSize, GridSize);
                 }
             }
@@ -104,7 +143,7 @@ namespace astar1
         {
             if (startCell == null || endCell == null)
             {
-                MessageBox.Show("Kérem a start és a finish cellát is helyezze el!");
+                MessageBox.Show("Please set start and end cells.");
                 return;
             }
 
@@ -130,11 +169,5 @@ namespace astar1
 
         }
 
-        private void stepByStep_Click(object sender, EventArgs e)
-        {
-            btnStart.Hide();
-            btnClear.Hide();
-            
-        }
     }
 }

@@ -51,51 +51,51 @@ namespace astar1
             return new List<Cell>();//couldnt find path retuning empty list
         }
 
-        public static IEnumerable<> PathStepIterator(Cell[,] grid, Cell start, Cell end)
+        public static IEnumerable<AstarStepState> PathStepIterator(Cell[,] grid, Cell start, Cell end)
+        {
+            var openList = new List<Cell> { start };
+            var closedList = new HashSet<Cell>();
+            start.G = 0;
+            start.H = GetHeuristic(start, end);
+
+            while (openList.Any())
             {
-                var openList = new List<Cell> { start };
-                var closedList = new HashSet<Cell>();
-                start.G = 0;
-                start.H = GetHeuristic(start, end);
+                var current = openList.OrderBy(cell => cell.F).First();
 
-                while (openList.Any())
+                yield return new AstarStepState
                 {
-                    var current = openList.OrderBy(cell => cell.F).First();
+                    OpenList = new List<Cell>(openList),
+                    ClosedList = new HashSet<Cell>(closedList),
+                    Current = current
+                };
 
-                    yield return new 
+                if (current == end)
+                    yield break;
+
+                openList.Remove(current);
+                closedList.Add(current);
+
+                foreach (var neighbor in GetNeighbors(grid, current))
+                {
+                    if (closedList.Contains(neighbor) || neighbor.IsObstacle) continue;
+
+                    int tentativeG = current.G + 1;
+
+                    if (!openList.Contains(neighbor))
                     {
-                        OpenList = new List<Cell>(openList),
-                        ClosedList = new HashSet<Cell>(closedList),
-                        Current = current
-                    };
-
-                    if (current == end)
-                        yield break;
-
-                    openList.Remove(current);
-                    closedList.Add(current);
-
-                    foreach (var neighbor in GetNeighbors(grid, current))
-                    {
-                        if (closedList.Contains(neighbor) || neighbor.IsObstacle) continue;
-
-                        int tentativeG = current.G + 1;
-
-                        if (!openList.Contains(neighbor))
-                        {
-                            openList.Add(neighbor);
-                        }
-                        else if (tentativeG >= neighbor.G)
-                        {
-                            continue;
-                        }
-
-                        neighbor.Previous = current;
-                        neighbor.G = tentativeG;
-                        neighbor.H = GetHeuristic(neighbor, end);
+                        openList.Add(neighbor);
                     }
+                    else if (tentativeG >= neighbor.G)
+                    {
+                        continue;
+                    }
+
+                    neighbor.Previous = current;
+                    neighbor.G = tentativeG;
+                    neighbor.H = GetHeuristic(neighbor, end);
                 }
             }
+        }
 
 
         private static List<Cell> ReconstructPath(Cell end, Cell start)
@@ -140,5 +140,12 @@ namespace astar1
         {
             return System.Math.Abs(a.Row - b.Row) + System.Math.Abs(a.Col - b.Col);//distance formula
         }
+    }
+
+    public class AstarStepState
+    {
+        public List<Cell> OpenList { get; set; } = new List<Cell>();
+        public HashSet<Cell> ClosedList { get; set; } = new HashSet<Cell>();
+        public Cell Current { get; set; }
     }
 }
