@@ -32,6 +32,8 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.stepByStep = new System.Windows.Forms.Button();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlGrid
@@ -48,9 +50,9 @@
             // 
             this.btnStart.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnStart.ForeColor = System.Drawing.Color.Red;
-            this.btnStart.Location = new System.Drawing.Point(1012, 52);
+            this.btnStart.Location = new System.Drawing.Point(964, 56);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(97, 31);
+            this.btnStart.Size = new System.Drawing.Size(166, 46);
             this.btnStart.TabIndex = 1;
             this.btnStart.Text = "Start A*";
             this.btnStart.UseVisualStyleBackColor = false;
@@ -60,9 +62,9 @@
             // 
             this.btnClear.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnClear.ForeColor = System.Drawing.Color.Red;
-            this.btnClear.Location = new System.Drawing.Point(1012, 89);
+            this.btnClear.Location = new System.Drawing.Point(964, 121);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(97, 30);
+            this.btnClear.Size = new System.Drawing.Size(166, 55);
             this.btnClear.TabIndex = 2;
             this.btnClear.Text = "Clear Grid";
             this.btnClear.UseVisualStyleBackColor = false;
@@ -72,13 +74,24 @@
             // 
             this.stepByStep.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.stepByStep.ForeColor = System.Drawing.Color.Red;
-            this.stepByStep.Location = new System.Drawing.Point(1012, 125);
+            this.stepByStep.Location = new System.Drawing.Point(970, 334);
             this.stepByStep.Name = "stepByStep";
-            this.stepByStep.Size = new System.Drawing.Size(123, 31);
+            this.stepByStep.Size = new System.Drawing.Size(160, 40);
             this.stepByStep.TabIndex = 3;
             this.stepByStep.Text = "A* step by step";
             this.stepByStep.UseVisualStyleBackColor = false;
             this.stepByStep.Click += new System.EventHandler(this.stepByStep_Click);
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.trackBar1.Location = new System.Drawing.Point(922, 380);
+            this.trackBar1.Maximum = 300;
+            this.trackBar1.Minimum = 1;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(241, 56);
+            this.trackBar1.TabIndex = 100;
+            this.trackBar1.Value = 50;
             // 
             // Form1
             // 
@@ -86,13 +99,16 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Desktop;
             this.ClientSize = new System.Drawing.Size(1221, 1053);
+            this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.stepByStep);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.pnlGrid);
             this.Controls.Add(this.btnStart);
             this.Name = "Form1";
             this.Text = "A*";
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -101,7 +117,8 @@
         private System.Windows.Forms.Panel pnlGrid;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.Button stepByStep;
+        public System.Windows.Forms.TrackBar trackBar1;
+        public System.Windows.Forms.Button stepByStep;
     }
 }
 

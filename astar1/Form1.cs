@@ -39,7 +39,7 @@ namespace astar1
             pnlGrid.Paint += PnlGrid_Paint;
             pnlGrid.MouseClick += PnlGrid_MouseClick;
             stepTimer = new Timer();
-            stepTimer.Interval = 50;
+            stepTimer.Interval = trackBar1.Value;
             stepTimer.Tick += Timer1_Tick;
         }
 
@@ -53,13 +53,21 @@ namespace astar1
 
             stepEnumerator = AStarAlgorithm.PathStepIterator(grid, startCell, endCell).GetEnumerator();
             stepTimer.Start();
+
         }
 
         private void Timer1_Tick(object sender, EventArgs e)
         {
+            stepTimer.Interval = trackBar1.Value;
             if (stepEnumerator == null || !stepEnumerator.MoveNext())
             {
                 stepTimer.Stop();
+                path = AStarAlgorithm.FindPath(grid, startCell, endCell);
+                foreach (var cell in path)
+                {
+                    Rectangle cellRect = new Rectangle(cell.Col * GridSize, cell.Row * GridSize, GridSize, GridSize);
+                    pnlGrid.Invalidate(cellRect);
+                }
                 return;
             }
 
@@ -157,6 +165,8 @@ namespace astar1
 
         private void btnClear_Click(object sender, EventArgs e)
         {
+            stepTimer.Stop();
+            stepEnumerator = null;
             path.Clear();
             path.Add(null);
             foreach (var cell in grid)
