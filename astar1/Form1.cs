@@ -50,7 +50,12 @@ namespace astar1
                 MessageBox.Show("Please set start and end cells.");
                 return;
             }
-
+            path = AStarAlgorithm.FindPath(grid,startCell,endCell);
+            if (!path.Contains(endCell))
+            {
+                MessageBox.Show("Cannot reach destination - no path");
+                return;
+            }
             stepEnumerator = AStarAlgorithm.PathStepIterator(grid, startCell, endCell).GetEnumerator();
             stepTimer.Start();
 
