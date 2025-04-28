@@ -46,7 +46,6 @@
             this.pnlGrid.TabIndex = 0;
             this.pnlGrid.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlGrid_Paint);
             this.pnlGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PnlGrid_MouseClick);
-            this.pnlGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PnlGrid_MouseDown);
             // 
             // btnStart
             // 
