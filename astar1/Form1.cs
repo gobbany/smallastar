@@ -186,5 +186,9 @@ namespace astar1
 
         }
 
+        private void MazeGen_click(object sender, EventArgs e)
+        {
+
+        }
     }      
 } 

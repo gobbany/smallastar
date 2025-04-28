@@ -34,6 +34,7 @@
             this.stepByStep = new System.Windows.Forms.Button();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.MazeBut = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -106,12 +107,26 @@
             this.textBox1.Text = "Speed of stepping:";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // MazeBut
+            // 
+            this.MazeBut.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.MazeBut.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.MazeBut.ForeColor = System.Drawing.Color.Red;
+            this.MazeBut.Location = new System.Drawing.Point(964, 566);
+            this.MazeBut.Name = "MazeBut";
+            this.MazeBut.Size = new System.Drawing.Size(153, 52);
+            this.MazeBut.TabIndex = 102;
+            this.MazeBut.Text = "Maze Generation";
+            this.MazeBut.UseVisualStyleBackColor = false;
+            this.MazeBut.Click += new System.EventHandler(this.MazeGen_click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Desktop;
             this.ClientSize = new System.Drawing.Size(1221, 1053);
+            this.Controls.Add(this.MazeBut);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.stepByStep);
@@ -134,6 +149,7 @@
         public System.Windows.Forms.TrackBar trackBar1;
         public System.Windows.Forms.Button stepByStep;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button MazeBut;
     }
 }
 
