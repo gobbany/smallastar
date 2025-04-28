@@ -43,7 +43,7 @@
             this.pnlGrid.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.pnlGrid.Location = new System.Drawing.Point(30, 31);
             this.pnlGrid.Name = "pnlGrid";
-            this.pnlGrid.Size = new System.Drawing.Size(765, 745);
+            this.pnlGrid.Size = new System.Drawing.Size(803, 740);
             this.pnlGrid.TabIndex = 0;
             this.pnlGrid.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlGrid_Paint);
             this.pnlGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PnlGrid_MouseClick);

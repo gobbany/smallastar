@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -17,8 +18,11 @@ namespace astar1
         private Cell endCell = null; //finish
         private List<Cell> path = new List<Cell>(); //path list
 
+        private MazeGenerator generator = new MazeGenerator(Rows,Columns);   
+        private bool[,] maze;
         private IEnumerator<AstarStepState> stepEnumerator;
         private Timer stepTimer;
+        private bool cleared=true;
 
         public Form1()
         {
@@ -183,12 +187,24 @@ namespace astar1
             startCell = null;
             endCell = null;
             pnlGrid.Invalidate();
-
+            cleared = true;
         }
 
         private void MazeGen_click(object sender, EventArgs e)
         {
-
+            if (cleared)
+            {
+                maze = generator.Generate();
+                for (int i = 0; i < Rows; i++)
+                {
+                    for (int j = 0; j < Columns; j++)
+                    {
+                        if (!maze[i, j]) grid[i, j].IsObstacle = true;
+                        pnlGrid.Invalidate();
+                    }
+                }
+                cleared = false;
+            }
         }
     }      
 } 
