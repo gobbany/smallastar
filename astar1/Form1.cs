@@ -38,6 +38,7 @@ namespace astar1
 
             pnlGrid.Paint += PnlGrid_Paint;
             pnlGrid.MouseClick += PnlGrid_MouseClick;
+            pnlGrid.MouseDown += PnlGrid_MouseDown;
             stepTimer = new Timer();
             stepTimer.Interval = trackBar1.Value;
             stepTimer.Tick += Timer1_Tick;
@@ -63,7 +64,8 @@ namespace astar1
 
         private void Timer1_Tick(object sender, EventArgs e)
         {
-            stepTimer.Interval = trackBar1.Value;
+            stepTimer.Interval = 301-trackBar1.Value;
+            textBox1.Text="Speed of stepping: "+"\n"+(trackBar1.Value).ToString();
             if (stepEnumerator == null || !stepEnumerator.MoveNext())
             {
                 stepTimer.Stop();
@@ -170,6 +172,7 @@ namespace astar1
 
         private void btnClear_Click(object sender, EventArgs e)
         {
+            textBox1.Text="Speed of stepping: "+"\n"+(0).ToString();
             stepTimer.Stop();
             stepEnumerator = null;
             path.Clear();
@@ -184,5 +187,39 @@ namespace astar1
 
         }
 
+        private void PnlGrid_MouseDown(object sender, MouseEventArgs e)
+        {
+            int col = e.X / GridSize;
+            int row = e.Y / GridSize;
+
+            Rectangle cellRect = new Rectangle(col * GridSize, row * GridSize, GridSize, GridSize);
+            pnlGrid.Invalidate(cellRect);
+
+            if (row >= Rows || col >= Columns) return;
+
+            var clickedCell = grid[row, col];
+
+            if (e.Button == MouseButtons.Left)
+            {
+                if (startCell == null)
+                {
+                    startCell = grid[row, col];
+                }
+                else if (endCell == null && clickedCell != startCell)
+                {
+                    endCell = grid[row, col];
+                }
+                else if (clickedCell != startCell && clickedCell != endCell)
+                {
+                    grid[row, col].IsObstacle = true;
+                }
+            }
+            else if (e.Button == MouseButtons.Right)
+            {
+                grid[row, col].IsObstacle = false;
+                if (grid[row, col] == startCell) startCell = null;
+                if (grid[row, col] == endCell) endCell = null;
+            }
+        }
     }
 }

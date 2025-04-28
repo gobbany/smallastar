@@ -33,6 +33,7 @@
             this.btnClear = new System.Windows.Forms.Button();
             this.stepByStep = new System.Windows.Forms.Button();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,6 +46,7 @@
             this.pnlGrid.TabIndex = 0;
             this.pnlGrid.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlGrid_Paint);
             this.pnlGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PnlGrid_MouseClick);
+            this.pnlGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PnlGrid_MouseDown);
             // 
             // btnStart
             // 
@@ -93,12 +95,25 @@
             this.trackBar1.TabIndex = 100;
             this.trackBar1.Value = 50;
             // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.textBox1.ForeColor = System.Drawing.Color.Red;
+            this.textBox1.Location = new System.Drawing.Point(947, 426);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(216, 28);
+            this.textBox1.TabIndex = 101;
+            this.textBox1.Text = "Speed of stepping:";
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Desktop;
             this.ClientSize = new System.Drawing.Size(1221, 1053);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.stepByStep);
             this.Controls.Add(this.btnClear);
@@ -119,6 +134,7 @@
         private System.Windows.Forms.Button btnClear;
         public System.Windows.Forms.TrackBar trackBar1;
         public System.Windows.Forms.Button stepByStep;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
