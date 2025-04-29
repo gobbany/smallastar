@@ -167,12 +167,11 @@ namespace astar1
 
         public bool[,] Generate()
         {
-            // Initialize maze with all walls (false)
+            //walls--false
             for (int x = 0; x < width; x++)
                 for (int y = 0; y < height; y++)
                     maze[x, y] = false;
 
-            // Random starting point (odd coordinates)
             int startX = rand.Next(width / 2) * 2 + 1;
             int startY = rand.Next(height / 2) * 2 + 1;
             maze[startX, startY] = true;
@@ -190,7 +189,6 @@ namespace astar1
 
                 if (!maze[x, y])
                 {
-                    // Break the wall between (px, py) and (x, y)
                     maze[(x + px) / 2, (y + py) / 2] = true;
                     maze[x, y] = true;
 

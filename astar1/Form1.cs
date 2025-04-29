@@ -2,6 +2,7 @@
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -199,6 +200,7 @@ namespace astar1
                 {
                     for (int j = 0; j < Columns; j++)
                     {
+                        if(grid[i,j].IsObstacle && maze[i, j]) grid[i,j].IsObstacle=false;
                         if (!maze[i, j]) grid[i, j].IsObstacle = true;
                         pnlGrid.Invalidate();
                     }
