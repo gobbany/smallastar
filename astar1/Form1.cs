@@ -208,5 +208,10 @@ namespace astar1
                 cleared = false;
             }
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }      
 } 

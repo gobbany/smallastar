@@ -97,15 +97,16 @@
             // 
             // textBox1
             // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.textBox1.BackColor = System.Drawing.SystemColors.HotTrack;
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.textBox1.ForeColor = System.Drawing.Color.Red;
+            this.textBox1.ForeColor = System.Drawing.Color.LightCyan;
             this.textBox1.Location = new System.Drawing.Point(947, 426);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(216, 28);
             this.textBox1.TabIndex = 101;
             this.textBox1.Text = "Speed of stepping:";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // MazeBut
             // 
