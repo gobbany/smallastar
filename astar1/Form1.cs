@@ -23,7 +23,6 @@ namespace astar1
         private bool[,] maze;
         private IEnumerator<AstarStepState> stepEnumerator;
         private Timer stepTimer;
-        private bool cleared=true;
 
         public Form1()
         {
@@ -136,11 +135,11 @@ namespace astar1
 
             if (e.Button == MouseButtons.Left)
             {
-                if (startCell == null)
+                if (startCell == null && !grid[row, col].IsObstacle)
                 {
                     startCell = grid[row, col];
                 }
-                else if (endCell == null && clickedCell != startCell)
+                else if (endCell == null && clickedCell != startCell && !grid[row, col].IsObstacle)
                 {
                     endCell = grid[row, col];
                 }
@@ -148,6 +147,8 @@ namespace astar1
                 {
                     grid[row, col].IsObstacle = true;
                 }
+                if(clickedCell.IsObstacle)
+                    return;
             }
             else if (e.Button == MouseButtons.Right)
             {
@@ -188,12 +189,11 @@ namespace astar1
             startCell = null;
             endCell = null;
             pnlGrid.Invalidate();
-            cleared = true;
         }
 
         private void MazeGen_click(object sender, EventArgs e)
         {
-            if (cleared)
+            if (startCell==null && endCell==null)
             {
                 maze = generator.Generate();
                 for (int i = 0; i < Rows; i++)
@@ -205,11 +205,10 @@ namespace astar1
                         pnlGrid.Invalidate();
                     }
                 }
-                cleared = false;
             }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void trackBar1_Scroll(object sender, EventArgs e)
         {
 
         }
